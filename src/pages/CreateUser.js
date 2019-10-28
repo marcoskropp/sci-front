@@ -7,8 +7,9 @@ import {
   Grid,
   InputLabel,
   MenuItem,
-  TextField,
+  Paper,
   Select,
+  TextField,
   Typography
 } from "@material-ui/core";
 
@@ -21,7 +22,7 @@ export default class CreateUser extends Component {
       username: "",
       email: "",
       password: "",
-      role_id: 1,
+      role_id: 2,
       roles: [{ id: 1, name: "Professor" }, { id: 2, name: "Aluno" }]
     };
 
@@ -31,8 +32,6 @@ export default class CreateUser extends Component {
   }
 
   handleInputChange = event => {
-    console.log(event);
-
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -43,12 +42,12 @@ export default class CreateUser extends Component {
   render() {
     return (
       <Container>
-        <div>
+        <Paper style={{ padding: "30px" }}>
           <Typography variant="h4" component="h2" gutterBottom>
             REGISTRAR
           </Typography>
           {this.renderForm()}
-        </div>
+        </Paper>
       </Container>
     );
   }
@@ -66,7 +65,7 @@ export default class CreateUser extends Component {
             onChange={this.handleInputChange}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             fullWidth
             label="Username"
@@ -76,7 +75,7 @@ export default class CreateUser extends Component {
             onChange={this.handleInputChange}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             fullWidth
             label="Email"
@@ -86,7 +85,7 @@ export default class CreateUser extends Component {
             variant="outlined"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             fullWidth
             label="Password"
@@ -97,7 +96,7 @@ export default class CreateUser extends Component {
             type="password"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FormControl variant="outlined" fullWidth>
             <InputLabel variant="outlined" htmlFor="role_id">
               Tipo
@@ -114,12 +113,11 @@ export default class CreateUser extends Component {
           </FormControl>
           {/* <select name="role_id">{this.renderOptions()}</select> */}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Button type="submit" variant="contained" color="primary">
             Cadastrar
           </Button>
-        </Grid>
-        <Grid item xs={6}>
+          &nbsp;
           <Button
             variant="contained"
             color="secondary"
@@ -136,6 +134,8 @@ export default class CreateUser extends Component {
   renderOptions = () =>
     // this.state.roles.map(role => <option value={role.id}>{role.name}</option>);
     this.state.roles.map(role => (
-      <MenuItem value={role.id}>{role.name}</MenuItem>
+      <MenuItem key={role.id} value={role.id}>
+        {role.name}
+      </MenuItem>
     ));
 }
