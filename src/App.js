@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { CssBaseline } from "@material-ui/core";
 import CreateUser from "./pages/Users/CreateUser";
 import { EditUser } from "./pages/Users/EditUser";
 import { ShowUser } from "./pages/Users/ShowUser";
@@ -18,6 +19,7 @@ function Dashboard() {
 export default function App() {
   return (
     <BrowserRouter>
+      <CssBaseline />
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/dashboard" component={withAuthChecking(Dashboard)} />

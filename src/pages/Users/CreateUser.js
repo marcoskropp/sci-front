@@ -22,7 +22,7 @@ export default function CreateUser(props) {
     username: "",
     email: "",
     password: "",
-    roleId: 0
+    roleId: ""
   });
   const [roles, setRoles] = useState([]);
 
