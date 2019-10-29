@@ -25,8 +25,8 @@ export async function show(id) {
     return await response.json();
 }
 
-export async function update(workshop, id) {
-    const response = await fetch(`${HOST}/workshops/${id}`, {
+export async function update(workshop) {
+    const response = await fetch(`${HOST}/workshops/${workshop.id}`, {
         method: 'PUT',
         body: JSON.stringify(workshop)
     });

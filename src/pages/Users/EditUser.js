@@ -5,6 +5,8 @@ import { index } from '../../services/Roles.services';
 import { update, show } from '../../services/Users.services';
 
 export const EditUser = (props) => {
+    const userId = props.match.params.id;
+
     const [roles, setRoles] = useState([]);
     const [user, setUser] = useState({
         id: null,
@@ -20,7 +22,7 @@ export const EditUser = (props) => {
             setRoles(roles);
         };
         const getUser = async () => {
-            const myUser = await show(props.match.params.id);
+            const myUser = await show(userId);
             setUser({
                 id: myUser.id,
                 name: myUser.name,
@@ -31,12 +33,14 @@ export const EditUser = (props) => {
         };
         getRoles();
         getUser();
-    }, [props.match.params.id]);
+    }, [userId]);
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        await update(user);
+        const { roleId, ...rest } = user;
+        
+        await update({ ...rest, role_id: roleId });
 
         alert('Editado com sucesso');
 
