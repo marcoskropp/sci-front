@@ -6,15 +6,21 @@ import { ShowUser } from "./pages/Users/ShowUser";
 import CreateWorkshop from "./pages/Workshops/CreateWorkshop";
 import ShowWorkshop from "./pages/Workshops/ShowWorkshop";
 import Login from "./pages/Login";
+import withAuthChecking from "./pages/withAuthChecking";
 /*
 import Dashboard from './pages/Dashboard';
 */
+
+function Dashboard() {
+  return <p>Dashboard</p>;
+}
 
 export default function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Login} />
+        <Route path="/dashboard" component={withAuthChecking(Dashboard)} />
         <Route path="/users/create" component={CreateUser} />
         <Route path="/users/:id/edit" component={EditUser} />
         <Route path="/users/:id" component={ShowUser} />

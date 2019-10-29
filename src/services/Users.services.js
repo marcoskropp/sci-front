@@ -1,31 +1,5 @@
 const HOST = "http://localhost:3333";
 
-export async function requireAuth(nextState, replace) {
-  const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/check`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  const isAuhtenticated = await response.json();
-
-  return isAuhtenticated;
-}
-
-export async function login(email, password) {
-  const response = await fetch(`${HOST}/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  return await response.json();
-}
-
 export async function index() {
   const response = await fetch(`${HOST}/users`, {
     method: "GET"
