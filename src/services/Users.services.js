@@ -1,4 +1,4 @@
-const HOST = "http://localhost:3333";
+const HOST = "http://192.168.2.111:3333";
 
 export async function index() {
   const response = await fetch(`${HOST}/users`, {

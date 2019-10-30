@@ -17,7 +17,7 @@ export default function TableRow(props) {
   return (
     <TableRowMui>
       <TableCell>
-        <Checkbox name={title} onClick={handleCheck} value={checked} />
+        <Checkbox name={title} onClick={handleCheck} checked={checked} />
       </TableCell>
       <TableCell>{title}</TableCell>
       <TableCell>{description}</TableCell>

@@ -1,5 +1,5 @@
 // const HOST = "http://localhost:3333";
-const HOST = "http://localhost:3333";
+const HOST = "http://192.168.2.111:3333";
 
 export async function checkAuth() {
   const token = localStorage.getItem("jwt_token");

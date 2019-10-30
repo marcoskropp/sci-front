@@ -35,23 +35,25 @@ function Subscriptions() {
 
   const renderTable = () => {
     return (
-      <Table>
-        <TableHead>
-          <TableRowMui>
-            <TableCell />
-            <TableCell>Título</TableCell>
-            <TableCell>Descrição</TableCell>
-            <TableCell>Local</TableCell>
-            <TableCell>Data de Início</TableCell>
-            <TableCell>Data de Término</TableCell>
-          </TableRowMui>
-        </TableHead>
-        <TableBody>
-          {workshops.map(workshop => (
-            <TableRow key={workshop.id} {...workshop} />
-          ))}
-        </TableBody>
-      </Table>
+      <div style={{ overflowX: "auto", width: "100%" }}>
+        <Table>
+          <TableHead>
+            <TableRowMui>
+              <TableCell />
+              <TableCell>Título</TableCell>
+              <TableCell>Descrição</TableCell>
+              <TableCell>Local</TableCell>
+              <TableCell>Data de Início</TableCell>
+              <TableCell>Data de Término</TableCell>
+            </TableRowMui>
+          </TableHead>
+          <TableBody>
+            {workshops.map(workshop => (
+              <TableRow key={workshop.id} {...workshop} />
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     );
   };
 
