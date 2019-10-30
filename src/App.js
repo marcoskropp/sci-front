@@ -7,6 +7,7 @@ import { ShowUser } from "./pages/Users/ShowUser";
 import CreateWorkshop from "./pages/Workshops/CreateWorkshop";
 import ShowWorkshop from "./pages/Workshops/ShowWorkshop";
 import Login from "./pages/Login";
+import Subscriptions from "./pages/Subscriptions/Subscriptions";
 import withAuthChecking from "./pages/withAuthChecking";
 /*
 import Dashboard from './pages/Dashboard';
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/users/:id" component={ShowUser} />
         <Route path="/workshops/create" component={CreateWorkshop} />
         <Route path="/workshops/:id" component={ShowWorkshop} />
+        <Route path="/subscriptions" component={Subscriptions} />
       </Switch>
     </BrowserRouter>
   );

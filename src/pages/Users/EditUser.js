@@ -23,6 +23,7 @@ export const EditUser = (props) => {
         };
         const getUser = async () => {
             const myUser = await show(userId);
+
             setUser({
                 id: myUser.id,
                 name: myUser.name,
