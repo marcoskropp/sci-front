@@ -1,12 +1,13 @@
-import { Paper, Button, Container, Typography, } from "@material-ui/core";
 import React, { useState, useEffect, forwardRef } from 'react';
+import { Paper, Button, Container, Typography, } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 
-import { index } from '../../services/Subscriptions.services';
+import { index, subscriptions } from '../../services/Subscriptions.services';
 import TableRow from '../../components/TableRow.js'
 
 export default function Subscriptions() {
     const [workshops, setWorkshops] = useState([]);
+    const [currentWorkhops, setCurrentWorkshops] = useState([]);
 
     useEffect(() => {
         const getWorkshops = async () => {
@@ -17,8 +18,41 @@ export default function Subscriptions() {
         getWorkshops();
     }, []);
 
-    const save = () => {
+    const checkWorkshop = (id, subscribed) => {
+        let includedWorkshop = true
 
+        if (subscribed === undefined) return
+
+        if (!currentWorkhops.length) {
+            return setCurrentWorkshops([{ id, subscribed }])
+        }
+
+        for (let index = 0; index < currentWorkhops.length; index++) {
+            if (id === currentWorkhops[index].id) {
+                setCurrentWorkshops(
+                    currentWorkhops
+                        .slice(0, index)
+                        .concat(
+                            currentWorkhops
+                                .slice(index + 1, currentWorkhops.length)
+                        )
+                )
+                break;
+            }
+
+            if (id !== currentWorkhops[index].id) {
+                includedWorkshop = false
+            }
+        }
+
+        if (!includedWorkshop)
+            return setCurrentWorkshops([...currentWorkhops, { id, subscribed }])
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+
+        console.log(currentWorkhops)
     }
 
     const link = forwardRef((props, ref) => (
@@ -39,7 +73,7 @@ export default function Subscriptions() {
                 </thead>
                 <tbody>
                     {workshops.map(workshop => (
-                        <TableRow key={workshop.id} {...workshop} />
+                        <TableRow checkWorkshop={checkWorkshop} key={workshop.id} {...workshop} />
                     ))}
                 </tbody>
             </table>
@@ -52,20 +86,13 @@ export default function Subscriptions() {
                 <Typography variant="h4" component="h2" gutterBottom>
                     INSCREVER-SE
                 </Typography>
-                {renderTable()}
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={save()}
-                >
-                    Salvar
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    to="/"
-                    component={link}
-                >
+                <form onSubmit={handleSubmit}>
+                    {renderTable()}
+                    <Button type="submit" variant="contained" color="secondary">
+                        Salvar
+                    </Button>
+                </form>
+                <Button variant="contained" color="secondary" to="/" component={link}>
                     Voltar
                 </Button>
             </Paper>

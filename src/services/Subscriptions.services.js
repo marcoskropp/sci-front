@@ -31,10 +31,10 @@ export async function index() {
     return await response.json();
 }
 
-export async function subscribe(workshopId, userId) {
+export async function subscriptions(workshops) {
     const response = await fetch(`${HOST}/subscriptions`, {
         method: 'POST',
-        body: JSON.stringify({ workshopId, userId })
+        body: JSON.stringify({ workshops })
     });
 
 

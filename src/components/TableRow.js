@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function TableRow(props) {
-    const { title, description, place, startDate, endDate, subscribed } = props;
+    const { id, title, description, place, startDate, endDate, subscribed, checkWorkshop } = props;
 
     const [checked, setChecked] = useState(subscribed);
+
+    useEffect(() => {
+        checkWorkshop(id, checked)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [checked])
 
     const handleCheck = () => {
         setChecked(!checked)
