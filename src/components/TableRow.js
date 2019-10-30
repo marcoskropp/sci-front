@@ -1,22 +1,29 @@
 import React, { useState } from "react";
+import {
+  Checkbox,
+  TableRow as TableRowMui,
+  TableCell
+} from "@material-ui/core";
 
 export default function TableRow(props) {
-    const { title, description, place, startDate, endDate, subscribed } = props;
+  const { title, description, place, startDate, endDate, subscribed } = props;
 
-    const [checked, setChecked] = useState(subscribed);
+  const [checked, setChecked] = useState(subscribed);
 
-    const handleCheck = () => {
-        setChecked(!checked)
-    };
+  const handleCheck = () => {
+    setChecked(!checked);
+  };
 
-    return (
-        <tr>
-            <td><input type="checkbox" name={title} onClick={handleCheck} value={checked} /></td>
-            <td>{title}</td>
-            <td>{description}</td>
-            <td>{place}</td>
-            <td>{startDate}</td>
-            <td>{endDate}</td>
-        </tr>
-    );
+  return (
+    <TableRowMui>
+      <TableCell>
+        <Checkbox name={title} onClick={handleCheck} value={checked} />
+      </TableCell>
+      <TableCell>{title}</TableCell>
+      <TableCell>{description}</TableCell>
+      <TableCell>{place}</TableCell>
+      <TableCell>{new Date(startDate).toLocaleDateString()}</TableCell>
+      <TableCell>{new Date(endDate).toLocaleDateString()}</TableCell>
+    </TableRowMui>
+  );
 }
