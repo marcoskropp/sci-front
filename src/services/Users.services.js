@@ -1,7 +1,7 @@
-const HOST = "http://192.168.2.111:3333";
+const { REACT_APP_API_HOST } = process.env;
 
 export async function index() {
-  const response = await fetch(`${HOST}/users`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/users`, {
     method: "GET"
   });
 
@@ -9,7 +9,7 @@ export async function index() {
 }
 
 export async function store(user) {
-  const response = await fetch(`${HOST}/users`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -21,7 +21,7 @@ export async function store(user) {
 }
 
 export async function show(id) {
-  const response = await fetch(`${HOST}/users/${id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/users/${id}`, {
     method: "GET"
   });
 
@@ -29,7 +29,7 @@ export async function show(id) {
 }
 
 export async function update(user) {
-  const response = await fetch(`${HOST}/users/${user.id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/users/${user.id}`, {
     method: "PUT",
     body: JSON.stringify(user)
   });
@@ -38,7 +38,7 @@ export async function update(user) {
 }
 
 export async function destroy(id) {
-  const response = await fetch(`${HOST}/users/${id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/users/${id}`, {
     method: "DELETE"
   });
 

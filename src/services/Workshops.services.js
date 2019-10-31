@@ -1,8 +1,8 @@
-const HOST = "http://192.168.2.111:3333";
+const { REACT_APP_API_HOST } = process.env;
 
 export async function index() {
   const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/workshops`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/workshops`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`
@@ -14,7 +14,7 @@ export async function index() {
 
 export async function store(workshop) {
   const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/workshops`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/workshops`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ export async function store(workshop) {
 
 export async function show(id) {
   const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/workshops/${id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/workshops/${id}`, {
     method: "GET"
   });
 
@@ -37,7 +37,7 @@ export async function show(id) {
 
 export async function update(workshop) {
   const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/workshops/${workshop.id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/workshops/${workshop.id}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export async function update(workshop) {
 
 export async function destroy(id) {
   const token = localStorage.getItem("jwt_token");
-  const response = await fetch(`${HOST}/workshops/${id}`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/workshops/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`

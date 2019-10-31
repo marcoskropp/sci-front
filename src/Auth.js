@@ -1,9 +1,9 @@
-const HOST = "http://localhost:3333";
+const { REACT_APP_API_HOST } = process.env;
 
 class Auth {
   async checkAuth() {
     const token = localStorage.getItem("jwt_token");
-    const response = await fetch(`${HOST}/check`, {
+    const response = await fetch(`${REACT_APP_API_HOST}/check`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
@@ -14,7 +14,7 @@ class Auth {
   }
 
   async login(email, password, callback) {
-    const response = await fetch(`${HOST}/login`, {
+    const response = await fetch(`${REACT_APP_API_HOST}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

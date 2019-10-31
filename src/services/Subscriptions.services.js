@@ -1,27 +1,25 @@
-const HOST = "http://192.168.2.111:3333";
+const { REACT_APP_API_HOST } = process.env;
+
+const token = localStorage.getItem("jwt_token");
+
+const headers = {
+  Authorization: `Bearer ${token}`,
+  "Content-Type": "application/json"
+}
 
 export async function index() {
-  const token = localStorage.getItem("jwt_token");
-
-  const response = await fetch(`${HOST}/subscriptions`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/subscriptions`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers
   });
 
   return await response.json();
 }
 
 export async function subscribe(workshopIds) {
-  const token = localStorage.getItem("jwt_token");
-
-  const response = await fetch(`${HOST}/subscribe`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/subscribe`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    },
+    headers,
     body: JSON.stringify({ workshopIds })
   });
 
@@ -29,14 +27,9 @@ export async function subscribe(workshopIds) {
 }
 
 export async function unsubscribe(workshopIds) {
-  const token = localStorage.getItem("jwt_token");
-
-  const response = await fetch(`${HOST}/unsubscribe`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/unsubscribe`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    },
+    headers,
     body: JSON.stringify({ workshopIds })
   });
 

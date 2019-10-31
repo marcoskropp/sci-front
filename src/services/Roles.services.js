@@ -1,7 +1,7 @@
-const HOST = "http://192.168.2.111:3333";
+const { REACT_APP_API_HOST } = process.env;
 
 export async function index() {
-  const response = await fetch(`${HOST}/roles`, {
+  const response = await fetch(`${REACT_APP_API_HOST}/roles`, {
     method: "GET"
   });
 

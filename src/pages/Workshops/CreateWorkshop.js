@@ -1,7 +1,5 @@
 import React, { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
-import withBars from "../../hocs/withBars";
-import withAuthChecking from "../../hocs/withAuthChecking";
 import {
   Grid,
   Paper,
@@ -11,8 +9,10 @@ import {
   Typography
 } from "@material-ui/core";
 
+import withBars from "../../hocs/withBars";
+import withAuthChecking from "../../hocs/withAuthChecking";
+
 import { store } from "../../services/Workshops.services";
-import CreateUser from "../Users/CreateUser";
 
 function CreateWorkshop(props) {
   const [workshop, setWorkshop] = useState({
@@ -27,8 +27,6 @@ function CreateWorkshop(props) {
 
   const handleSubmit = async event => {
     event.preventDefault();
-
-    // const { startDate, endDate, ...rest } = workshop;
 
     await store(workshop);
 
