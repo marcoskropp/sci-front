@@ -8,14 +8,7 @@ import CreateWorkshop from "./pages/Workshops/CreateWorkshop";
 import ShowWorkshop from "./pages/Workshops/ShowWorkshop";
 import Login from "./pages/Login";
 import Subscriptions from "./pages/Subscriptions/Subscriptions";
-import withAuthChecking from "./pages/withAuthChecking";
-/*
-import Dashboard from './pages/Dashboard';
-*/
-
-function Dashboard() {
-  return <p>Dashboard</p>;
-}
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
@@ -23,7 +16,7 @@ export default function App() {
       <CssBaseline />
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/dashboard" component={withAuthChecking(Dashboard)} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/users/create" component={CreateUser} />
         <Route path="/users/:id/edit" component={EditUser} />
         <Route path="/users/:id" component={ShowUser} />

@@ -44,8 +44,6 @@ export default function CreateUser(props) {
 
     await store({ ...rest, role_id: roleId });
 
-    alert("Cadastrado com sucesso");
-
     props.history.push("/");
   };
 
@@ -155,6 +153,7 @@ export default function CreateUser(props) {
 
   return (
     <Container>
+      <br />
       <Paper style={{ padding: "30px" }}>
         <Typography variant="h4" component="h2" gutterBottom>
           REGISTRAR

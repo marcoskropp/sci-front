@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from "react";
+import {
+  Checkbox,
+  TableRow as TableRowMui,
+  TableCell
+} from "@material-ui/core";
 
 export default function TableRow(props) {
-    const { id, title, description, place, startDate, endDate, subscribed, checkWorkshop } = props;
+  const { id, title, description, place, startDate, endDate, subscribed, checkWorkshop } = props;
 
-    const [checked, setChecked] = useState(subscribed);
+  const [checked, setChecked] = useState(subscribed);
 
-    useEffect(() => {
-        checkWorkshop(id, checked)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [checked])
+  useEffect(() => {
+    checkWorkshop(id, checked)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked])
 
-    const handleCheck = () => {
-        setChecked(!checked)
-    };
+  const handleCheck = () => {
+    setChecked(!checked)
+  };
 
-    return (
-        <tr>
-            <td><input type="checkbox" name={title} onClick={handleCheck} value={checked} /></td>
-            <td>{title}</td>
-            <td>{description}</td>
-            <td>{place}</td>
-            <td>{startDate}</td>
-            <td>{endDate}</td>
-        </tr>
-    );
+  return (
+    <TableRowMui>
+      <TableCell>
+        <Checkbox name={title} onClick={handleCheck} checked={checked} />
+      </TableCell>
+      <TableCell>{title}</TableCell>
+      <TableCell>{description}</TableCell>
+      <TableCell>{place}</TableCell>
+      <TableCell>{new Date(startDate).toLocaleDateString()}</TableCell>
+      <TableCell>{new Date(endDate).toLocaleDateString()}</TableCell>
+    </TableRowMui>
+  );
 }

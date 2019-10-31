@@ -1,30 +1,42 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import { Paper, Button, Container, Typography, } from "@material-ui/core";
 import { Link } from 'react-router-dom';
+import {
+    Paper,
+    Button,
+    Container,
+    Typography,
+    Table,
+    TableBody,
+    TableHead,
+    TableCell,
+    TableRow as TableRowMui
+} from "@material-ui/core";
 
 import { index, subscriptions } from '../../services/Subscriptions.services';
-import TableRow from '../../components/TableRow.js'
+import withAuthChecking from "../../hocs/withAuthChecking";
+import TableRow from '../../components/TableRow.js';
+import withBars from "../../hocs/withBars";
 
-export default function Subscriptions() {
+function Subscriptions() {
     const [workshops, setWorkshops] = useState([]);
     const [currentWorkhops, setCurrentWorkshops] = useState([]);
 
     useEffect(() => {
         const getWorkshops = async () => {
             const myWorkshops = await index();
-
             setWorkshops(myWorkshops);
         };
         getWorkshops();
     }, []);
 
     const checkWorkshop = (id, subscribed) => {
-        let includedWorkshop = true
-
-        if (subscribed === undefined) return
+        let includedWorkshop = true;
+        console.log(id)
+        if (subscribed === undefined) return;
+        console.log(currentWorkhops)
 
         if (!currentWorkhops.length) {
-            return setCurrentWorkshops([{ id, subscribed }])
+            return setCurrentWorkshops([{ id, subscribed }]);
         }
 
         for (let index = 0; index < currentWorkhops.length; index++) {
@@ -36,47 +48,47 @@ export default function Subscriptions() {
                             currentWorkhops
                                 .slice(index + 1, currentWorkhops.length)
                         )
-                )
+                );
                 break;
             }
 
             if (id !== currentWorkhops[index].id) {
-                includedWorkshop = false
+                includedWorkshop = false;
             }
         }
 
         if (!includedWorkshop)
-            return setCurrentWorkshops([...currentWorkhops, { id, subscribed }])
+            return setCurrentWorkshops([...currentWorkhops, { id, subscribed }]);
     }
 
-    const handleSubmit = event => {
-        event.preventDefault()
-
+    const save = () => { 
+        console.log('asd')
         console.log(currentWorkhops)
-    }
+    };
 
-    const link = forwardRef((props, ref) => (
-        <Link innerRef={ref} {...props} />
-    ));
+    const link = forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
 
     const renderTable = () => {
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Descrição</th>
-                        <th>Local</th>
-                        <th>Data de Início</th>
-                        <th>Data de Término</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {workshops.map(workshop => (
-                        <TableRow checkWorkshop={checkWorkshop} key={workshop.id} {...workshop} />
-                    ))}
-                </tbody>
-            </table>
+            <div style={{ overflowX: "auto", width: "100%" }}>
+                <Table>
+                    <TableHead>
+                        <TableRowMui>
+                            <TableCell />
+                            <TableCell>Título</TableCell>
+                            <TableCell>Descrição</TableCell>
+                            <TableCell>Local</TableCell>
+                            <TableCell>Data de Início</TableCell>
+                            <TableCell>Data de Término</TableCell>
+                        </TableRowMui>
+                    </TableHead>
+                    <TableBody>
+                        {workshops.map(workshop => (
+                            <TableRow checkWorkshop={checkWorkshop} key={workshop.id} {...workshop} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         );
     };
 
@@ -85,17 +97,19 @@ export default function Subscriptions() {
             <Paper style={{ padding: "30px" }}>
                 <Typography variant="h4" component="h2" gutterBottom>
                     INSCREVER-SE
-                </Typography>
-                <form onSubmit={handleSubmit}>
-                    {renderTable()}
-                    <Button type="submit" variant="contained" color="secondary">
-                        Salvar
-                    </Button>
-                </form>
-                <Button variant="contained" color="secondary" to="/" component={link}>
+        </Typography>
+                {renderTable()}
+                <br />
+                <Button variant="contained" color="primary" onClick={save}>
+                    Salvar
+        </Button>
+                &nbsp;
+        <Button variant="contained" color="default" to="/dashboard" component={link}>
                     Voltar
-                </Button>
+        </Button>
             </Paper>
         </Container>
     );
 }
+
+export default withBars(withAuthChecking(Subscriptions));
