@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../services/Auth.services";
 import {
@@ -13,6 +13,14 @@ import {
 export default function Login(props) {
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt_token");
+
+    if (token) {
+      props.history.push("/dashboard");
+    }
+  }, [props.history]);
 
   const link = forwardRef((props, ref) => <Link {...props} ref={ref} />);
 

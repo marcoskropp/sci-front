@@ -14,19 +14,31 @@ export async function index() {
 }
 
 export async function subscribe(workshopIds) {
-    const response = await fetch(`${HOST}/subscribe`, {
-        method: 'POST',
-        body: JSON.stringify({ workshopIds })
-    });
+  const token = localStorage.getItem("jwt_token");
+
+  const response = await fetch(`${HOST}/subscribe`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ workshopIds })
+  });
 
   return await response.json();
 }
 
 export async function unsubscribe(workshopIds) {
-    const response = await fetch(`${HOST}/unsubscribe`, {
-        method: 'POST',
-        body: JSON.stringify({ workshopIds })
-    });
+  const token = localStorage.getItem("jwt_token");
+
+  const response = await fetch(`${HOST}/unsubscribe`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ workshopIds })
+  });
 
   return await response.json();
 }

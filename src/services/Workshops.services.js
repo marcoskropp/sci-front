@@ -1,48 +1,62 @@
-const HOST = 'http://localhost:3333';
+const HOST = "http://192.168.2.111:3333";
 
 export async function index() {
-    const response = await fetch(`${HOST}/workshops`, {
-        method: 'GET'
-    });
+  const token = localStorage.getItem("jwt_token");
+  const response = await fetch(`${HOST}/workshops`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 
-    return await response.json();
+  return await response.json();
 }
 
 export async function store(workshop) {
-    const response = await fetch(`${HOST}/workshops`, {
-        method: 'POST',
-        body: JSON.stringify(workshop)
-    });
+  const token = localStorage.getItem("jwt_token");
+  const response = await fetch(`${HOST}/workshops`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(workshop)
+  });
 
-    return await response.json();
+  return await response.json();
 }
 
 export async function show(id) {
-    const response = await fetch(`${HOST}/workshops/${id}`, {
-        method: 'GET'
-    });
+  const token = localStorage.getItem("jwt_token");
+  const response = await fetch(`${HOST}/workshops/${id}`, {
+    method: "GET"
+  });
 
-    return await response.json();
+  return await response.json();
 }
 
 export async function update(workshop) {
-    const response = await fetch(`${HOST}/workshops/${workshop.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(workshop)
-    });
+  const token = localStorage.getItem("jwt_token");
+  const response = await fetch(`${HOST}/workshops/${workshop.id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(workshop)
+  });
 
-    return await response.json();
+  return await response.json();
 }
 
 export async function destroy(id) {
-    const response = await fetch(`${HOST}/workshops/${id}`, {
-        method: 'DELETE'
-    });
+  const token = localStorage.getItem("jwt_token");
+  const response = await fetch(`${HOST}/workshops/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 
-    return await response.json();
+  return await response.json();
 }
-
-
-
-
-

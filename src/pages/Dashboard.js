@@ -6,7 +6,9 @@ import { Container, Typography } from "@material-ui/core";
 function Dashboard() {
   return (
     <Container>
-      <Typography>Dashboard</Typography>
+      <Typography align="center" variant="h3">
+        Dashboard
+      </Typography>
     </Container>
   );
 }

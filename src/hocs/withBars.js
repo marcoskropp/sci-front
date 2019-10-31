@@ -16,7 +16,8 @@ import {
   Dashboard,
   Menu,
   List as ListIcon,
-  ExitToApp
+  ExitToApp,
+  PlaylistAdd
 } from "@material-ui/icons";
 import { logout } from "../services/Auth.services";
 
@@ -43,7 +44,7 @@ export default function withBars(WrappedComponent) {
     };
 
     const renderDrawOptions = () => (
-      <List style={{ minWidth: 250 }}>
+      <List style={{ minWidth: 300 }}>
         <ListItem button component={link} to="/dashboard">
           <ListItemIcon>
             <Dashboard />
@@ -55,6 +56,12 @@ export default function withBars(WrappedComponent) {
             <ListIcon />
           </ListItemIcon>
           <ListItemText>Inscrições</ListItemText>
+        </ListItem>
+        <ListItem button component={link} to="/workshops/create">
+          <ListItemIcon>
+            <PlaylistAdd />
+          </ListItemIcon>
+          <ListItemText>Cadastrar oficina</ListItemText>
         </ListItem>
       </List>
     );

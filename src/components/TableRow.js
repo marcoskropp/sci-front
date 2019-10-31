@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Checkbox,
   TableRow as TableRowMui,
@@ -6,23 +6,20 @@ import {
 } from "@material-ui/core";
 
 export default function TableRow(props) {
-  const { id, title, description, place, startDate, endDate, subscribed, checkWorkshop } = props;
-
-  const [checked, setChecked] = useState(subscribed);
-
-  useEffect(() => {
-    checkWorkshop(id, checked)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked])
-
-  const handleCheck = () => {
-    setChecked(!checked)
-  };
+  const {
+    title,
+    description,
+    place,
+    startDate,
+    endDate,
+    subscribed,
+    checkWorkshop
+  } = props;
 
   return (
     <TableRowMui>
       <TableCell>
-        <Checkbox name={title} onClick={handleCheck} checked={checked} />
+        <Checkbox name={title} onClick={checkWorkshop} checked={subscribed} />
       </TableCell>
       <TableCell>{title}</TableCell>
       <TableCell>{description}</TableCell>
