@@ -12,7 +12,7 @@ import {
 
 import { update } from '../../services/Workshops.services';
 
-export default function EditWorkshop(props) {
+export function EditWorkshop(props) {
   const workshopId = props.match.params.id;
 
   const [workshop, setWorkshop] = useState({
@@ -132,3 +132,5 @@ EditWorkshop.propTypes = {
     })
   })
 };
+
+export default EditWorkshop;

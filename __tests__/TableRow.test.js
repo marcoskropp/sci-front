@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { name, lorem, random } from 'faker';
 
-import TableRow from './TableRow';
+import TableRow from '../src/components/TableRow';
 
 const props = {
   title: name.title(),
@@ -15,7 +15,7 @@ const props = {
 };
 
 describe('Testing TableRow Component', () => {
-  it('Render Component', () => {
+  it('Snapshot renders', () => {
     const wrapper = shallow(<TableRow {...props} />);
 
     expect(wrapper).toMatchSnapshot();

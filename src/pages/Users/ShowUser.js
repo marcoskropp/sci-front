@@ -86,3 +86,5 @@ ShowUser.propTypes = {
     })
   })
 };
+
+export default ShowUser;

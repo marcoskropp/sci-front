@@ -126,3 +126,5 @@ EditUser.propTypes = {
     })
   })
 };
+
+export default EditUser;

@@ -4,7 +4,7 @@ module.exports = {
     '<rootDir>/config/test.js'
   ],
   testMatch: [
-    '<rootDir>/src/**/?(*.)(test).js'
+    '<rootDir>/__tests__/**/?(*.)(test).js'
   ],
   testURL: 'http://localhost',
   transform: {
