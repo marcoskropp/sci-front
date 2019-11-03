@@ -5,7 +5,7 @@
   "scripts": {
     "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "NODE_ENV=test jest --config jest.config.js",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -29,6 +29,11 @@
           ".jsx"
         ]
       }
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/test.js"
     ]
   },
   "eslintConfig": {
@@ -56,7 +61,6 @@
     "@material-ui/icons": "^4.5.1",
     "babel-eslint": "^10.0.3",
     "date-fns": "^2.6.0",
-    "eslint-config-airbnb": "^18.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -64,12 +68,23 @@
     "react-scripts": "3.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-annotate-console-log": "^1.0.0",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
     "cross-env": "^6.0.3",
-    "eslint": "^5.16.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
+    "faker": "^4.1.0",
     "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "jest-transform-stub": "^2.0.0",
     "lint-staged": "^9.4.2"
   }
 }

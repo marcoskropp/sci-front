@@ -6,7 +6,7 @@ import {
   TableCell
 } from '@material-ui/core';
 
-export default function TableRow(props) {
+function TableRow(props) {
   const {
     title,
     description,
@@ -40,3 +40,5 @@ TableRow.propTypes = {
   subscribed: PropTypes.bool,
   checkWorkshop: PropTypes.func
 };
+
+export default TableRow;
