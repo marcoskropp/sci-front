@@ -6,7 +6,7 @@
     "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test:unit": "NODE_ENV=test jest --config jest.config.js",
-    "test:unit:coverage": "NODE_ENV=test jest --config jest.config.js --coverage",
+    "test:unit:coverage": "yarn test:unit --coverage",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -17,7 +17,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "cross-env CI=true yarn test --bail --findRelatedTests",
+      "cross-env CI=true yarn test:unit --bail --findRelatedTests",
       "git add"
     ]
   },
