@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container,
@@ -9,12 +9,12 @@ import {
   TableHead,
   TableRow,
   Paper
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import withBars from "../hocs/withBars";
-import withAuthChecking from "../hocs/withAuthChecking";
+import withBars from '../hocs/withBars';
+import withAuthChecking from '../hocs/withAuthChecking';
 
-import { index } from "../services/Workshops.services";
+import { index } from '../services/Workshops.services';
 
 const useStyles = makeStyles({
   root: {
@@ -30,15 +30,15 @@ const useStyles = makeStyles({
 function Dashboard() {
   const classes = useStyles();
 
-  const [workshops, setWorkshops] = useState([])
+  const [workshops, setWorkshops] = useState([]);
 
   useEffect(() => {
     const getWorkshops = async () => {
       const workshops = await index();
       setWorkshops(workshops);
-    }
+    };
     getWorkshops();
-  }, [])
+  }, []);
 
   return (
     <Container>

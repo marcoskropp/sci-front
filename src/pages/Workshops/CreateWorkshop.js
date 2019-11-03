@@ -1,5 +1,6 @@
-import React, { useState, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, forwardRef } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Grid,
   Paper,
@@ -7,20 +8,20 @@ import {
   Container,
   TextField,
   Typography
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import withBars from "../../hocs/withBars";
-import withAuthChecking from "../../hocs/withAuthChecking";
+import withBars from '../../hocs/withBars';
+import withAuthChecking from '../../hocs/withAuthChecking';
 
-import { store } from "../../services/Workshops.services";
+import { store } from '../../services/Workshops.services';
 
 function CreateWorkshop(props) {
   const [workshop, setWorkshop] = useState({
-    title: "",
-    description: "",
-    place: "",
-    startDate: "",
-    endDate: ""
+    title: '',
+    description: '',
+    place: '',
+    startDate: '',
+    endDate: ''
   });
 
   const link = forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
@@ -30,7 +31,7 @@ function CreateWorkshop(props) {
 
     await store(workshop);
 
-    props.history.push("/");
+    props.history.push('/');
   };
 
   const handleChange = event => {
@@ -116,7 +117,7 @@ function CreateWorkshop(props) {
 
   return (
     <Container>
-      <Paper style={{ padding: "30px" }}>
+      <Paper style={{ padding: '30px' }}>
         <Typography variant="h4" component="h2" gutterBottom>
           REGISTRAR
         </Typography>
@@ -125,5 +126,12 @@ function CreateWorkshop(props) {
     </Container>
   );
 }
+
+CreateWorkshop.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
+};
+
 
 export default withBars(withAuthChecking(CreateWorkshop));

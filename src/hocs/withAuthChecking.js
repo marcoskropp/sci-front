@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import { Box, CircularProgress } from "@material-ui/core";
-import { checkAuth } from "../services/Auth.services";
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Box, CircularProgress } from '@material-ui/core';
+import { checkAuth } from '../services/Auth.services';
 
 export default function withAuthChecking(WrappedComponent) {
-  return function(props) {
+  return function (props) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 

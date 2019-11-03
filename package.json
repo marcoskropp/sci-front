@@ -21,15 +21,6 @@
     ]
   },
   "rules": {
-    "arrow-body-style": [
-      "error",
-      "always"
-    ],
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
-    "import/prefer-default-export": false,
     "react/jsx-filename-extension": [
       1,
       {
@@ -63,6 +54,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "babel-eslint": "^10.0.3",
     "date-fns": "^2.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "prop-types": "^15.7.2",
@@ -74,6 +66,9 @@
   "devDependencies": {
     "cross-env": "^6.0.3",
     "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2"
   }

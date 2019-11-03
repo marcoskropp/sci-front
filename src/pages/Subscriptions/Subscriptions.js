@@ -1,5 +1,5 @@
-import React, { useState, useEffect, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Paper,
   Button,
@@ -10,20 +10,20 @@ import {
   TableHead,
   TableCell,
   TableRow as TableRowMui
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 import {
   index,
   subscribe,
   unsubscribe
-} from "../../services/Subscriptions.services";
-import withAuthChecking from "../../hocs/withAuthChecking";
-import TableRow from "../../components/TableRow.js";
-import withBars from "../../hocs/withBars";
+} from '../../services/Subscriptions.services';
+import withAuthChecking from '../../hocs/withAuthChecking';
+import TableRow from '../../components/TableRow';
+import withBars from '../../hocs/withBars';
 
 function Subscriptions() {
   const [workshops, setWorkshops] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const getWorkshops = async () => {
@@ -35,9 +35,7 @@ function Subscriptions() {
 
   const checkWorkshop = id => () => {
     setWorkshops(
-      workshops.map(item =>
-        item.id === id ? { ...item, subscribed: !item.subscribed } : item
-      )
+      workshops.map(item => (item.id === id ? { ...item, subscribed: !item.subscribed } : item))
     );
   };
 
@@ -54,46 +52,44 @@ function Subscriptions() {
     const resunsub = await unsubscribe(unsubscribeWorkshopIds);
 
     if (ressub && resunsub) {
-      setMessage("Salvo com sucesso!");
+      setMessage('Salvo com sucesso!');
       setTimeout(() => {
-        setMessage("");
+        setMessage('');
       }, 3500);
     }
   };
 
   const link = forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
 
-  const renderTable = () => {
-    return (
-      <div style={{ overflowX: "auto", width: "100%" }}>
-        <Table>
-          <TableHead>
-            <TableRowMui>
-              <TableCell />
-              <TableCell>Título</TableCell>
-              <TableCell>Descrição</TableCell>
-              <TableCell>Local</TableCell>
-              <TableCell>Data de Início</TableCell>
-              <TableCell>Data de Término</TableCell>
-            </TableRowMui>
-          </TableHead>
-          <TableBody>
-            {workshops.map(workshop => (
-              <TableRow
-                checkWorkshop={checkWorkshop(workshop.id)}
-                key={workshop.id}
-                {...workshop}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    );
-  };
+  const renderTable = () => (
+    <div style={{ overflowX: 'auto', width: '100%' }}>
+      <Table>
+        <TableHead>
+          <TableRowMui>
+            <TableCell />
+            <TableCell>Título</TableCell>
+            <TableCell>Descrição</TableCell>
+            <TableCell>Local</TableCell>
+            <TableCell>Data de Início</TableCell>
+            <TableCell>Data de Término</TableCell>
+          </TableRowMui>
+        </TableHead>
+        <TableBody>
+          {workshops.map(workshop => (
+            <TableRow
+              checkWorkshop={checkWorkshop(workshop.id)}
+              key={workshop.id}
+              {...workshop}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
 
   return (
     <Container>
-      <Paper style={{ padding: "30px" }}>
+      <Paper style={{ padding: '30px' }}>
         <Typography variant="h4" component="h2" gutterBottom>
           INSCREVER-SE
         </Typography>

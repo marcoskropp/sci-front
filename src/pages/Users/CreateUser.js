@@ -1,5 +1,6 @@
-import React, { useState, useEffect, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, forwardRef } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Button,
   Container,
@@ -11,18 +12,18 @@ import {
   Select,
   TextField,
   Typography
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import { index } from "../../services/Roles.services";
-import { store } from "../../services/Users.services";
+import { index } from '../../services/Roles.services';
+import { store } from '../../services/Users.services';
 
 export default function CreateUser(props) {
   const [user, setUser] = useState({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    roleId: ""
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+    roleId: ''
   });
   const [roles, setRoles] = useState([]);
 
@@ -44,7 +45,7 @@ export default function CreateUser(props) {
 
     await store({ ...rest, role_id: roleId });
 
-    props.history.push("/");
+    props.history.push('/');
   };
 
   const handleChange = event => {
@@ -53,24 +54,25 @@ export default function CreateUser(props) {
     setUser({ ...user, [name]: value });
   };
 
-  const renderOptions = () => {
-    return roles.map(role => {
-      if (user.roleId === role.id)
-        return (
-          <MenuItem key={role.id} value={role.id} selected>
-            {role.name}
-          </MenuItem>
-        );
+  const renderOptions = () => roles.map(role => {
+    if (user.roleId === role.id) {
       return (
-        <MenuItem key={role.id} value={role.id}>
+        <MenuItem key={role.id} value={role.id} selected>
           {role.name}
         </MenuItem>
       );
-    });
-  };
+    }
+    return (
+      <MenuItem key={role.id} value={role.id}>
+        {role.name}
+      </MenuItem>
+    );
+  });
 
   const renderForm = () => {
-    const { name, username, email, password, roleId } = user;
+    const {
+      name, username, email, password, roleId
+    } = user;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -126,7 +128,7 @@ export default function CreateUser(props) {
                 onChange={handleChange}
                 value={roleId}
                 labelWidth={35}
-                inputProps={{ id: "roleId", name: "roleId" }}
+                inputProps={{ id: 'roleId', name: 'roleId' }}
               >
                 {renderOptions()}
               </Select>
@@ -154,7 +156,7 @@ export default function CreateUser(props) {
   return (
     <Container>
       <br />
-      <Paper style={{ padding: "30px" }}>
+      <Paper style={{ padding: '30px' }}>
         <Typography variant="h4" component="h2" gutterBottom>
           REGISTRAR
         </Typography>
@@ -163,3 +165,9 @@ export default function CreateUser(props) {
     </Container>
   );
 }
+
+CreateUser.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
+};

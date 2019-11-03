@@ -86,11 +86,3 @@ ShowUser.propTypes = {
     })
   })
 };
-
-ShowUser.defaultProps = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.number
-    })
-  })
-};

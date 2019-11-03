@@ -1,5 +1,6 @@
-import React, { useState, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, forwardRef } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   SwipeableDrawer,
@@ -10,16 +11,16 @@ import {
   Toolbar,
   Typography,
   IconButton
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from '@material-ui/core';
 import {
   Dashboard,
   Menu,
   List as ListIcon,
   ExitToApp,
   PlaylistAdd
-} from "@material-ui/icons";
-import { logout } from "../services/Auth.services";
+} from '@material-ui/icons';
+
+import { logout } from '../services/Auth.services';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,8 +34,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function withBars(WrappedComponent) {
-  return function(props) {
+function withBars(WrappedComponent) {
+  return function (props) {
     const [drawerOpened, setDrawerOpened] = useState(false);
     const classes = useStyles();
     const link = forwardRef((props, ref) => <Link {...props} ref={ref} />);
@@ -68,7 +69,8 @@ export default function withBars(WrappedComponent) {
 
     const handleLogout = async () => {
       await logout();
-      props.history.push("/");
+      /* eslint react/prop-types: 0 */
+      props.history.push('/');
     };
 
     return (
@@ -103,3 +105,5 @@ export default function withBars(WrappedComponent) {
     );
   };
 }
+
+export default withBars;
