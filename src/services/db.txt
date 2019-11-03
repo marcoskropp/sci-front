@@ -1,5 +1,0 @@
-create database adonis;
-
-alter user 'root'@'localhost' indentified with mysql_native_password by 'ifcvideira';
-
-flush privileges;

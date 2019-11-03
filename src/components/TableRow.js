@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Checkbox,
   TableRow as TableRowMui,
   TableCell
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 export default function TableRow(props) {
   const {
@@ -29,3 +30,13 @@ export default function TableRow(props) {
     </TableRowMui>
   );
 }
+
+TableRow.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  place: PropTypes.string,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+  subscribed: PropTypes.bool,
+  checkWorkshop: PropTypes.func
+};

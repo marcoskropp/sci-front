@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "rules": {
+        "no-var": 2,
+        "prefer-const": 1,
+        "no-console": 1,
+        "no-debugger": 1,
+        "no-unreachable": 1,
+        "react/self-closing-comp": 2,
+        "react/jsx-indent": [1, 2],
+        "react/jsx-indent-props": [1, 2],
+        "react/jsx-curly-spacing": [1, "never"],
+        "react/jsx-no-bind": ["off"],
+        "import/prefer-default-export": 0,
+        "arrow-parens": 0,
+        "comma-dangle": 0,
+        "react/destructuring-assignment": 0,
+        "react/jsx-filename-extension": 0,
+        "no-return-await": 0,
+        "no-unused-vars": 1,
+        "react/require-default-props": 0
+    }
+}

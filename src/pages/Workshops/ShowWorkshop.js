@@ -1,127 +1,147 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-    Grid,
-    Paper,
-    Button,
-    Container,
-    TextField,
-    Typography
-} from "@material-ui/core";
+  Grid,
+  Paper,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from '@material-ui/core';
 
-import { show } from '../../services/Workshops.services';
+import withBars from "../../hocs/withBars";
+import withAuthChecking from "../../hocs/withAuthChecking";
 
-export default function ShowWorkshop(props) {
-    const [workshop, setWorkshop] = useState({
-        title: '',
-        description: '',
-        place: '',
-        startDate: '',
-        endDate: ''
-    });
+import { show } from "../../services/Workshops.services";
 
-    useEffect(() => {
-        const getWorkshop = async () => {
-            const myWorkshop = await show(props.match.params.id);
-            setWorkshop({ ...myWorkshop });
-        };
-        getWorkshop();
-    }, [props.match.params.id]);
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+    overflowX: "auto",
+    marginTop: 30
+  },
+  table: {
+    minWidth: 650
+  }
+});
 
-    const link = forwardRef((props, ref) => (
-        <Link innerRef={ref} {...props} />
-    ));
+function ShowWorkshop(props) {
+  const classes = useStyles();
 
-    const handleChange = event => {
-        const { name, value } = event.target;
+  const [workshop, setWorkshop] = useState({});
 
-        setWorkshop({ ...workshop, [name]: value });
-    }
+  useEffect(() => {
+    const getWorkshop = async () => {
+      const myWorkshop = await show(props.match.params.id);
+      setWorkshop({ ...myWorkshop });
+    };
+    getWorkshop();
+  }, [props.match.params.id]);
 
-    const renderForm = () => {
-        const { title, description, place, startDate, endDate } = workshop
+  const link = forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
 
-        return (
-            <Grid container spacing={3} justify="center">
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Título"
-                        name="title"
-                        value={title}
-                        variant="outlined"
-                        onChange={handleChange}
-                        disabled
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        fullWidth
-                        label="Descrição"
-                        name="description"
-                        value={description}
-                        variant="outlined"
-                        onChange={handleChange}
-                        disabled
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        fullWidth
-                        label="Local"
-                        name="place"
-                        onChange={handleChange}
-                        value={place}
-                        variant="outlined"
-                        disabled
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        fullWidth
-                        label="Data de início"
-                        name="startDate"
-                        onChange={handleChange}
-                        value={startDate}
-                        variant="outlined"
-                        type="date"
-                        disabled
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        fullWidth
-                        label="Data de término"
-                        name="endDate"
-                        onChange={handleChange}
-                        value={endDate}
-                        variant="outlined"
-                        type="date"
-                        disabled
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        to="/"
-                        component={link}
-                    >
-                        Voltar
-                        </Button>
-                </Grid>
-            </Grid>
-        );
-    }
-
+  const renderForm = () => {
+    const { title, description, place, startDate, endDate } = workshop;
+    console.log(workshop);
     return (
-        <Container>
-            <Paper style={{ padding: "30px" }}>
-                <Typography variant="h4" component="h2" gutterBottom>
-                    VISUALIZAR
-                </Typography>
-                {renderForm()}
-            </Paper>
-        </Container>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            name="title"
+            value={title}
+            variant="outlined"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            name="description"
+            value={description}
+            variant="outlined"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            name="place"
+            value={place}
+            variant="outlined"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            name="startDate"
+            value={startDate}
+            variant="outlined"
+            type="text"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            name="endDate"
+            value={endDate}
+            variant="outlined"
+            type="text"
+            disabled
+          />
+        </Grid>
+      </Grid>
     );
+  };
+
+  const renderTable = () => {
+    return (
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Incritos</TableCell>
+            <TableCell align="right">Email</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {workshop.users &&
+            workshop.users.map(({ id, name, email }) => (
+              <TableRow key={id}>
+                <TableCell component="th" scope="row">
+                  {name}
+                </TableCell>
+                <TableCell align="right">{email}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    );
+  };
+
+  return (
+    <Container>
+      <Paper style={{ padding: "30px" }}>
+        <Typography variant="h4" component="h2" gutterBottom>
+          VISUALIZAR
+        </Typography>
+        {renderForm()}
+        {renderTable()}
+        <Grid item xs={12}>
+          <Button variant="contained" color="secondary" to="/" component={link}>
+            Voltar
+          </Button>
+        </Grid>
+      </Paper>
+    </Container>
+  );
 }
+
+export default withBars(withAuthChecking(ShowWorkshop));

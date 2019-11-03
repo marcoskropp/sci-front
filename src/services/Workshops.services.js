@@ -1,9 +1,9 @@
 const { REACT_APP_API_HOST } = process.env;
 
 export async function index() {
-  const token = localStorage.getItem("jwt_token");
+  const token = localStorage.getItem('jwt_token');
   const response = await fetch(`${REACT_APP_API_HOST}/workshops`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -13,12 +13,12 @@ export async function index() {
 }
 
 export async function store(workshop) {
-  const token = localStorage.getItem("jwt_token");
+  const token = localStorage.getItem('jwt_token');
   const response = await fetch(`${REACT_APP_API_HOST}/workshops`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(workshop)
   });
@@ -27,21 +27,25 @@ export async function store(workshop) {
 }
 
 export async function show(id) {
-  const token = localStorage.getItem("jwt_token");
+  const token = localStorage.getItem('jwt_token');
   const response = await fetch(`${REACT_APP_API_HOST}/workshops/${id}`, {
-    method: "GET"
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
   });
 
   return await response.json();
 }
 
 export async function update(workshop) {
-  const token = localStorage.getItem("jwt_token");
+  const token = localStorage.getItem('jwt_token');
   const response = await fetch(`${REACT_APP_API_HOST}/workshops/${workshop.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(workshop)
   });
@@ -50,9 +54,9 @@ export async function update(workshop) {
 }
 
 export async function destroy(id) {
-  const token = localStorage.getItem("jwt_token");
+  const token = localStorage.getItem('jwt_token');
   const response = await fetch(`${REACT_APP_API_HOST}/workshops/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`
     }
